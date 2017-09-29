@@ -12,6 +12,8 @@ npm-update:
 build: 
 	-mkdir -p dist
 	node_modules/.bin/rollup -c
+	node_modules/.bin/babel dist/helpers-lib-cjs.js -o dist/helpers-lib-cjs-es5.js
+	node_modules/.bin/babel dist/helpers-lib-umd.js -o dist/helpers-lib-umd-es5.js
 
 test:
 	node_modules/.bin/mocha tests/
