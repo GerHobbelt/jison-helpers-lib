@@ -1,5 +1,6 @@
 var assert = require("chai").assert;
-var helpers = require('../index.js');
+// NodeJS doesn't support ES2015 import statements yet, so we must use the compiled/rollup-ed version instead:
+var helpers = require('../dist/helpers-lib-cjs');
 
 // TODO real tests
 

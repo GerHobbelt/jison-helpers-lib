@@ -9,7 +9,9 @@ npm-install:
 npm-update:
 	ncu -a --packageFile=package.json
 
-build:
+build: 
+	-mkdir -p dist
+	node_modules/.bin/rollup -c
 
 test:
 	node_modules/.bin/mocha tests/
