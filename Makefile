@@ -16,7 +16,7 @@ build:
 	node_modules/.bin/babel dist/helpers-lib-umd.js -o dist/helpers-lib-umd-es5.js
 
 test:
-	node_modules/.bin/mocha tests/
+	node_modules/.bin/mocha --check-leaks tests/
 
 
 # increment the XXX <prelease> number in the package.json file: version <major>.<minor>.<patch>-<prelease>
