@@ -101,6 +101,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         });
     }
 
+    // properly quote and escape the given input string
+    function dquote(s) {
+        var sq = s.indexOf('\'') >= 0;
+        var dq = s.indexOf('"') >= 0;
+        if (sq && dq) {
+            s = s.replace(/"/g, '\\"');
+            dq = false;
+        }
+        if (dq) {
+            s = '\'' + s + '\'';
+        } else {
+            s = '"' + s + '"';
+        }
+        return s;
+    }
+
     //
     // Helper library for safe code execution/compilation, including dumping offending code to file for further error analysis
     // (the idea was originally coded in https://github.com/GerHobbelt/jison/commit/85e367d03b977780516d2b643afbe6f65ee758f2 )
@@ -233,6 +249,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     var index = {
         rmCommonWS: rmCommonWS,
         camelCase: camelCase,
+        dquote: dquote,
 
         exec: exec_and_diagnose_this_stuff,
         dump: dumpSourceToFile
