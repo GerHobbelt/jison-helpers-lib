@@ -34,7 +34,7 @@
     "babel-preset-env": "1.6.0",
     "babel-preset-modern-browsers": "9.0.2",
     "chai": "4.1.2",
-    "mocha": "3.5.3",
+    "mocha": "4.0.0",
     "rollup": "0.50.0"
   }
 }
