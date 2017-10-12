@@ -3,12 +3,13 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function (global, factory) {
-    (typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define(factory) : global['jison-helpers-lib'] = factory();
-})(undefined, function () {
+    (typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('@gerhobbelt/recast')) : typeof define === 'function' && define.amd ? define(['@gerhobbelt/recast'], factory) : global['jison-helpers-lib'] = factory(global.recast);
+})(undefined, function (recast) {
     'use strict';
 
-    // Return TRUE if `src` starts with `searchString`. 
+    recast = recast && recast.hasOwnProperty('default') ? recast['default'] : recast;
 
+    // Return TRUE if `src` starts with `searchString`. 
     function startsWith(src, searchString) {
         return src.substr(0, searchString.length) === searchString;
     }
@@ -246,13 +247,67 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         return p;
     }
 
+    //
+    // Parse a given chunk of code to an AST.
+    //
+    // MIT Licensed
+    //
+    //
+    // This code is intended to help test and diagnose arbitrary chunks of code, answering questions like this:
+    //
+    // would the given code compile and possibly execute correctly, when included in a lexer, parser or other engine?
+    // 
+
+
+    //import astUtils from '@gerhobbelt/ast-util';
+    //import prettier from '@gerhobbelt/prettier-miscellaneous';
+    //import assert from 'assert';
+
+    // assert(recast);
+    // var types = recast.types;
+    // assert(types);
+    // var namedTypes = types.namedTypes;
+    // assert(namedTypes);
+    // var b = types.builders;
+    // assert(b);
+    // //assert(astUtils);
+
+
+    function parseCodeChunkToAST(src, options) {
+        var ast = recast.parse(src);
+        return ast;
+    }
+
+    function prettyPrintAST(ast, options) {
+        var new_src;
+
+        {
+            var s = recast.prettyPrint(ast, {
+                tabWidth: 2,
+                quote: 'single',
+                arrowParensAlways: true,
+
+                // Do not reuse whitespace (or anything else, for that matter)
+                // when printing generically.
+                reuseWhitespace: false
+            });
+            new_src = s.code;
+        }
+
+        new_src = new_src.replace(/\r\n|\n|\r/g, '\n'); // platform dependent EOL fixup
+        return new_src;
+    }
+
     var index = {
         rmCommonWS: rmCommonWS,
         camelCase: camelCase,
         dquote: dquote,
 
         exec: exec_and_diagnose_this_stuff,
-        dump: dumpSourceToFile
+        dump: dumpSourceToFile,
+
+        parseCodeChunkToAST: parseCodeChunkToAST,
+        prettyPrintAST: prettyPrintAST
     };
 
     return index;
