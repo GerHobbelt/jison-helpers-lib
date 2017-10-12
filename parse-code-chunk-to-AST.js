@@ -10,22 +10,19 @@
 // 
 
 
-var fs = require('fs');
-var path = require('path');
+import recast from '@gerhobbelt/recast';
+//import astUtils from '@gerhobbelt/ast-util';
+//import prettier from '@gerhobbelt/prettier-miscellaneous';
+//import assert from 'assert';
 
-var recast      = require('@gerhobbelt/recast');
-var astUtils    = require('@gerhobbelt/ast-util');
-var prettier    = require("@gerhobbelt/prettier-miscellaneous");
-var assert      = require('assert');
-
-assert(recast);
-var types = recast.types;
-assert(types);
-var namedTypes = types.namedTypes;
-assert(namedTypes);
-var b = types.builders;
-assert(b);
-assert(astUtils);
+// assert(recast);
+// var types = recast.types;
+// assert(types);
+// var namedTypes = types.namedTypes;
+// assert(namedTypes);
+// var b = types.builders;
+// assert(b);
+// //assert(astUtils);
 
 
 
@@ -56,6 +53,7 @@ function prettyPrintAST(ast, options) {
         new_src = prettier.format(ast);
     }
 
+    new_src = new_src.replace(/\r\n|\n|\r/g, '\n');    // platform dependent EOL fixup
     return new_src;
 }
 
