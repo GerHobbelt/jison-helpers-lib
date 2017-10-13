@@ -28,6 +28,10 @@ import recast from '@gerhobbelt/recast';
 
 
 function parseCodeChunkToAST(src, options) {
+    src = src
+    .replace(/@/g, '$')
+    .replace(/#/g, '$')
+    ;
     var ast = recast.parse(src);
     return ast;
 }
