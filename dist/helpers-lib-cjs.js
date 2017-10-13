@@ -290,6 +290,10 @@ function exec_and_diagnose_this_stuff(sourcecode, code_execution_rig, options, t
 
 
 function parseCodeChunkToAST(src, options) {
+    src = src
+    .replace(/@/g, '$')
+    .replace(/#/g, '$')
+    ;
     var ast = recast.parse(src);
     return ast;
 }

@@ -274,6 +274,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 
     function parseCodeChunkToAST(src, options) {
+        src = src.replace(/@/g, '$').replace(/#/g, '$');
         var ast = recast.parse(src);
         return ast;
     }
