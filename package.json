@@ -1,6 +1,6 @@
 {
   "name": "jison-helpers-lib",
-  "version": "0.1.0-194",
+  "version": "0.1.1-200",
   "description": "Helper functions shared among the jison repositories (jison, ebnf-parser, lex-parser, jison-lex)",
   "main": "dist/helpers-lib-cjs-es5.js",
   "module": "index.js",
@@ -35,6 +35,7 @@
     "babel-preset-modern-browsers": "9.0.2",
     "chai": "4.1.2",
     "mocha": "4.0.1",
+    "rollup-plugin-node-resolve": "3.0.0",
     "rollup": "0.50.0"
   }
 }
