@@ -12,16 +12,15 @@
 
 import recast from '@gerhobbelt/recast';
 //import astUtils from '@gerhobbelt/ast-util';
-//import prettier from '@gerhobbelt/prettier-miscellaneous';
-//import assert from 'assert';
+import assert from 'assert';
 
-// assert(recast);
-// var types = recast.types;
-// assert(types);
-// var namedTypes = types.namedTypes;
-// assert(namedTypes);
-// var b = types.builders;
-// assert(b);
+assert(recast);
+var types = recast.types;
+assert(types);
+var namedTypes = types.namedTypes;
+assert(namedTypes);
+var b = types.builders;
+assert(b);
 // //assert(astUtils);
 
 
@@ -29,8 +28,8 @@ import recast from '@gerhobbelt/recast';
 
 function parseCodeChunkToAST(src, options) {
     src = src
-    .replace(/@/g, '$')
-    .replace(/#/g, '$')
+    .replace(/@/g, '\uFFDA')
+    .replace(/#/g, '\uFFDB')
     ;
     var ast = recast.parse(src);
     return ast;
@@ -41,23 +40,40 @@ function parseCodeChunkToAST(src, options) {
 
 function prettyPrintAST(ast, options) {
     var new_src;
+    var options = options || {};
+    const defaultOptions = { 
+        tabWidth: 2,
+        quote: 'single',
+        arrowParensAlways: true,
 
-    if (1) {
-        var s = recast.prettyPrint(ast, { 
-            tabWidth: 2,
-            quote: 'single',
-            arrowParensAlways: true,
-
-            // Do not reuse whitespace (or anything else, for that matter)
-            // when printing generically.
-            reuseWhitespace: false
-        });
-        new_src = s.code;
-    } else {
-        new_src = prettier.format(ast);
+        // Do not reuse whitespace (or anything else, for that matter)
+        // when printing generically.
+        reuseWhitespace: false
+    };
+    for (var key in defaultOptions) {
+        if (options[key] === undefined) {
+            options[key] = defaultOptions[key];
+        }
     }
 
-    new_src = new_src.replace(/\r\n|\n|\r/g, '\n');    // platform dependent EOL fixup
+    var s = recast.prettyPrint(ast, { 
+        tabWidth: 2,
+        quote: 'single',
+        arrowParensAlways: true,
+
+        // Do not reuse whitespace (or anything else, for that matter)
+        // when printing generically.
+        reuseWhitespace: false
+    });
+    new_src = s.code;
+
+    new_src = new_src
+    .replace(/\r\n|\n|\r/g, '\n')    // platform dependent EOL fixup
+    // backpatch possible jison variables extant in the prettified code:
+    .replace(/\uFFDA/g, '@')
+    .replace(/\uFFDB/g, '#')
+    ;
+
     return new_src;
 }
 
