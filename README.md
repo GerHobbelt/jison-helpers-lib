@@ -27,6 +27,43 @@ Helper functions shared among the jison repositories (jison, ebnf-parser, lex-pa
 
 
 
+## install
+
+npm install @gerhobbelt/jison-helpers-lib
+
+
+## build
+
+To build the library yourself, follow the install & build directions of the [monorepo](https://github.com/GerHobbelt/jison).
+
+>
+> ### Note about ES6/rollup usage vs. ES5
+>
+> All `dist/` library files are 'self-contained': they include all 'local imports' 
+> from within this jison monorepo in order to deliver a choice of source files
+> for your perusal where you only need to worry about importing **external dependencies**
+> (such as `recast`).
+>
+> As such, these `dist/` files **should** be easier to minify and/or use in older
+> (ES5) environments.
+>
+> #### rollup
+>
+> Iff you use `rollup` or similar tools in an ES6/ES2015/ES2017 setting, then the
+> [`package.json::module`](https://github.com/rollup/rollup/wiki/pkg.module) has
+> already been set up for you to use the *original sources* instead!
+> 
+
+
+## usage
+
+```
+var helpers = require('jison-helpers-lib');
+
+...
+```
+
+
 
 ## license
 
