@@ -1,4 +1,4 @@
-# jison-helpers-lib \[SECONDARY SOURCE REPO]
+# jison-helpers-lib \[OBSOLETED]
 
 
 [![Join the chat at https://gitter.im/jison-parsers-lexers/Lobby](https://badges.gitter.im/jison-parsers-lexers/Lobby.svg)](https://gitter.im/jison-parsers-lexers/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
@@ -12,13 +12,13 @@ Helper functions shared among the jison repositories (jison, ebnf-parser, lex-pa
 
 
 > 
-> # deprecation ~ secondary-source notice
+> # deprecation notice
 >
-> From today (2017/oct/15) the jison-helpers-lib repository is only a **secondary source** 
+> From today (2017/oct/15) the jison-helpers-lib repository is **obsoleted** 
 > for the `jison-helpers-lib` package/codebase: the **primary source** is the 
 > [jison](https://github.com/GerHobbelt/jison) 
 > [monorepo](https://medium.com/netscape/the-case-for-monorepos-907c1361708a)'s `packages/helpers-lib/` 
-> directory.
+> directory. See also https://github.com/GerHobbelt/jison/issues/16.
 >
 > (For a comparable argument, see also ["Why is Babel a monorepo?"](https://github.com/babel/babel/blob/master/doc/design/monorepo.md))
 >
